@@ -10,12 +10,12 @@ require("./config")(app);
 
 // Endpoint Setup
 const indexRoutes = require("./routes/index.routes");
-app.use("/api", indexRoutes);
+app.use("/test", indexRoutes);
 
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
 // Error Handling
-require("./error-handling")(app);
+require("./error")(app);
 
 module.exports = app;
