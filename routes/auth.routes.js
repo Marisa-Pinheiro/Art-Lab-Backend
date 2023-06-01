@@ -104,7 +104,7 @@ router.post("/login", (req, res, next) => {
     .catch((err) => next(err));
 });
 
-// GET  /auth/verify
+// GET /auth/verify
 router.get("/verify", isAuthenticated, (req, res, next) => {
 
   // Send back the token payload object containing the user data
