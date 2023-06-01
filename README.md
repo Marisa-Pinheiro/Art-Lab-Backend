@@ -1,4 +1,4 @@
-# SHOP NAME
+# Art-Lab-FrontEnd
 
 <br>
 
@@ -251,13 +251,15 @@ Components:
 ├── jsonwebtoken <br>
 ├── mongoose <br>
 ├── morgan <br>
-└──nodemon <br>
+└── nodemon <br>
 <br>
 
 ## Links
 [Canva board](https://www.canva.com/design/DAFkYojjrio/3zcG87puCq2Kzyr5adZriw/edit?utm_source=shareButton&utm_medium=email&utm_campaign=designshare)
 
-[Git Repo]()
+[Git Repo Front-end](https://github.com/Marisa-Pinheiro/Art-Lab-FrontEnd)
+
+[Git Repo Back-end](https://github.com/Marisa-Pinheiro/Art-Lab-Backend)
 
 [Deploy Link]()
 
