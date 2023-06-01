@@ -8,19 +8,20 @@ const ilustrationSchema = new Schema(
     },
     name: {
       type: String,
-      required: [true, "Name is required."],
+      required: true,
       },
     imageUrl: {
       type: String,
-      required: [true, "Image is required."],
+      required: true,
     },
     price: {
       type: Number,
-      required: [true, "Price is required."],
+      required: true,
+    },
+    date: {
+      type: [Number],
+      required: true,
     }
-  },
-  {
-    timestamps: true,
   }
 );
 

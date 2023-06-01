@@ -130,28 +130,88 @@ Components:
 **Illustration model**
 
 ```javascript
- {
-  author: {type: String, required: true},
-  name: {type: String, required: true},
-  img: {type: String, required: true},
-  price: {type: Number, required: true},
-  timeOfCreation: {type: String, required: true},
- },
- {
-  timestamps: true,
- }
+{
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  name: {
+    type: String,
+    required: true,
+    },
+  imageUrl: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  date: {
+    type: [Number],
+    required: true,
+  }
+}
 ```
 
 **Billing model**
 
 ```javascript
 {
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  address: { type: String, required: true },
-  email: { type: String, required: true },
-  phone_number: { type: String, required: true },
-  payment_id: {type: String, required: true }
+  firstName: {
+      type: String,
+      required: true,
+  },
+  lastName: {
+      type: String,
+      required: true,
+  },
+  address: {
+      type: String,
+      required: true,
+  },
+  email: {
+      type: String,
+  },
+  phone_number: {
+      type: Number,
+  },
+  payment_id: {
+      type: Schema.Types.ObjectId,
+      ref: "Payment",
+  },
+},
+{
+  timestamps: true,
+}
+```
+
+**Payment model**
+
+```javascript
+{
+  userBuying: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  items: [
+    {
+    type: Schema.Types.ObjectId,
+    ref: "Illustration",
+    }
+  ],
+  itemsAuthors: [
+    {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    }
+  ],
+  totalPrice: {
+    type: Number,
+  }
+},
+{
+  timestamps: true,
 }
 ```
 
