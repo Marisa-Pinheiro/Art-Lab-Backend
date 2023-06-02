@@ -223,19 +223,19 @@ Components:
 | HTTP Method | URL                    | Request Body                 | Success status | Error Status | Description         |
 | ----------- | ---------------------- | ---------------------------- | -------------- | ------------ | ------------------- |
 | GET         | `/test    `            | test route                   |                |              | just a test route   |
-|AUTHENTICATION||||||
+|AUTHENTICATION|-|-|-|-|-|
 | GET         | `/auth/profile    `    | Saved session                | 200            | 404          | check if logged in  |
 | POST        | `/auth/signup`         | {username, email, password}  | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
 | POST        | `/auth/login`          | {email, password}         | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
 | POST        | `/auth/logout`         |                              | 204            | 400          | Logs out the user    |
-|ILLUSTRATIONS||||||
+|ILLUSTRATIONS|-|-|-|-|-|
 | GET         | `/api/illustrations`   |                              |                | 400          | Show all tournaments |
 | GET         | `/api/illustrations/:id`|                             |                |              | Show specific Art    |
-| POST        | `/api/illustration`    |                              | 201            | 400          | Create new Art       |
-|USER||||||
-| GET         | `/api/user/:id`        |                              |                |              | show User info       |
-| PUT         | `/api/user/:id`        |                              |                |              | Edit User info       |
-|PAYMENTS||||||
+| POST        | `/api/illustrations`    |                              | 201            | 400          | Create new Art       |
+|USER|-|-|-|-|-|
+| GET         | `/api/user-profile/:id`        |                              |                |              | show User info       |
+| PUT         | `/api/user-profile/:id`        |                              |                |              | Edit User info       |
+|PAYMENTS|-|-|-|-|-|
 | GET         | `/api/payment/`        |                              |                |              | show User info       |
 
 
