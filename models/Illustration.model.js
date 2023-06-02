@@ -19,7 +19,7 @@ const ilustrationSchema = new Schema(
       required: true,
     },
     date: {
-      type: [Number],
+      type: Number,
       required: true,
     }
   }

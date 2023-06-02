@@ -148,7 +148,7 @@ Components:
     required: true,
   },
   date: {
-    type: [Number],
+    type: Number,
     required: true,
   }
 }
