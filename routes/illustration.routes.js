@@ -34,7 +34,11 @@ router.post("/illustration/", async (req,res) => {
 })
 
 router.delete("/illustration/:id", async (req,res) => {
+
+  const {id} = req.params
+
   try {
+    await Illustration.findByIdAndDelete(id)
     response = "Artwork deleted"
     res.json(response);
   } catch (error) {

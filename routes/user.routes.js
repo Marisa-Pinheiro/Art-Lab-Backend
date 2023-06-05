@@ -43,8 +43,12 @@ router.put("/user-profile/:id", async (req, res, next) => {
 });
 
 router.delete("/user-profile/:id", async (req,res) => {
+
+  const {id} = req.params
+
   try {
-    let response = "User deleted"
+    await User.findByIdAndDelete(id)
+    response = "User deleted"
     res.json(response);
   } catch {
     console.log(error)
