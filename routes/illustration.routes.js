@@ -3,6 +3,7 @@ const router = express.Router();
 const Illustration = require("../models/Illustration.model");
 const imgUploader = require('../config/cloudinary.config');
 
+//Find all Illustration
 router.get("/illustration", async (req, res) => {
   try {
     let response = await Illustration.find()
@@ -12,6 +13,29 @@ router.get("/illustration", async (req, res) => {
   }
 });
 
+//Create Illustration
+//upload
+router.post("/illustration/upload", imgUploader.single("imageUrl"), (req, res, next) => {
+  if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+  res.json({ fileUrl: req.file.path });
+});
+
+//create
+router.post("/illustration/", async (req,res) => {
+  try {
+    const {author, name, price, date, imageUrl} = req.body;
+    await Illustration.create({author, name, imageUrl, price, date} ,{new:true});
+    let response = "object created";
+    res.json(response);
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+//Find specific Illustration
 router.get("/illustration/:id", async (req, res) => {
   try {
     let {id} = req.params
@@ -22,17 +46,22 @@ router.get("/illustration/:id", async (req, res) => {
   }
 });
 
-router.post("/illustration/", async (req,res) => {
+//Update Illustration
+router.put("/illustration/:id", async (req,res) => {
+
+  const {id} = req.params
+
   try {
-    const {author, name, price, date, imageUrl} = req.body;
-    await Illustration.create({author, name, imageUrl: req.file.path, price, date} ,{new:true});
-    let response = "object created";
+    const {name, price, date} = req.body;
+    await Illustration.findByIdAndUpdate(id, {name, price, date} ,{new:true});
+    let response = "Illustration updated";
     res.json(response);
   } catch (error) {
-    console.log(error, req.body)
+    console.log(error)
   }
 })
 
+//Delete  Illustration
 router.delete("/illustration/:id", async (req,res) => {
 
   const {id} = req.params
@@ -42,17 +71,8 @@ router.delete("/illustration/:id", async (req,res) => {
     response = "Artwork deleted"
     res.json(response);
   } catch (error) {
-    console.log(error, req.body)
+    console.log(error)
   }
 })
-
-router.post("/illustration/upload", imgUploader.single("imageUrl"), (req, res, next) => {
-  if (!req.file) {
-    next(new Error("No file uploaded!"));
-    return;
-  }
-  res.json({ fileUrl: req.file.path });
-});
-
 
 module.exports = router;
