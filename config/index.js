@@ -3,7 +3,7 @@ const express = require("express");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 
-// Handling requests from Cross origin resource sharing
+// Handling requests Cross Origin Resource Sharing, from defined adress
 const cors = require("cors");
 
 // Middleware configuration
@@ -13,10 +13,9 @@ module.exports = (app) => {
   // controls a very specific header to pass headers from the frontend
   app.use(
     cors({
-      origin: process.env.FRONTEND_URL,
+      origin: ['http://localhost:5173'],
     })
   );
-
   app.use(logger("dev"));
 
   // To have access to `body` property in the request
