@@ -13,10 +13,34 @@ router.get("/:userid/cart", async (req, res) => {
   }
 });
 
-module.exports = router;
+router.post("/:userid/cart/:illustrationid", async (req, res) => {
+  try {
+    const {userid, illustrationid} = req.params;
 
-/*
-  const newCart = await ShoppingCart.create({owner: userid})
-  cartId.push(newCart)
-  await User.findByIdAndUpdate(userid, {ShoppingCart: cartId})
-*/
+    const cart = await ShoppingCart.findOne({owner: userid})
+    
+    let cartArray = [];
+
+    if(cart.items.length === 0) {
+
+      cartArray.push(illustrationid)
+
+      await ShoppingCart.findByIdAndUpdate(cart._id, {items: cartArray})
+
+    } else {
+
+      cart.items.forEach((item) => {
+        cartArray.push(item)
+      })
+      
+      cartArray.push(illustrationid)
+  
+      await ShoppingCart.findByIdAndUpdate(cart._id, {items: cartArray})
+    }
+    res.json(cart);
+  } catch (err) {
+    console.log(err)
+  }
+});
+
+module.exports = router;

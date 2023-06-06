@@ -24,12 +24,11 @@ router.post("/illustration/upload", fileUploader.single("imageUrl"), (req, res, 
 });
 
 //create
-router.post("/illustration/", async (req,res) => {
+router.post("/illustration", async (req,res) => {
   try {
     const {author, name, price, date, imageUrl} = req.body;
-    await Illustration.create({author, name, imageUrl, price, date} ,{new:true});
-    let response = "object created";
-    res.json(response);
+    const resp = await Illustration.create({author, name, imageUrl, price, date} ,{new:true});
+    res.json(resp);
   } catch (error) {
     console.log(error)
   }
