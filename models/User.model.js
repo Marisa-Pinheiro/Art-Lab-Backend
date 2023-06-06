@@ -20,16 +20,6 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Password is required."],
     },
-    shoppingCart: [
-      {
-        type: Schema.Types.ObjectId,
-        ref:'Illustration',
-      }
-    ],
-    paymentInformation: {
-      type: Schema.Types.ObjectId,
-      ref:'Billing-details',
-    },
   }
 );
 

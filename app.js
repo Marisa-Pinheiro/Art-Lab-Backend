@@ -26,6 +26,10 @@ app.use("/api", illustrationRoutes);
 const userRoutes = require("./routes/user.routes");
 app.use("/api", userRoutes);
 
+// Payment
+const paymentRoutes = require("./routes/payment.routes");
+app.use("/api", paymentRoutes);
+
 // Error
 require("./error")(app);
 

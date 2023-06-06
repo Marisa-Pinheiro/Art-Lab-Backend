@@ -8,9 +8,10 @@ const saltRounds = 10;
 const User = require("../models/User.model");
 const jwt = require("jsonwebtoken");
 const { isAuthenticated } = require("../middleware/jwt.middleware.js");
+const ShoppingCart = require("../models/shoppinCart.model");
 
 // POST /auth/signup  - Creates a new user in the database
-router.post("/signup", (req, res, next) => {
+router.post("/signup", async (req, res, next) => {
   const { email, password, username } = req.body;
 
   // Check if email or password or username are provided as empty strings
@@ -52,12 +53,15 @@ router.post("/signup", (req, res, next) => {
       const hashedPassword = bcrypt.hashSync(password, salt);
 
       // Create the new user in the database
+
       return User.create({ email, password: hashedPassword, username });
     })
-    .then((createdUser) => {
-
+    .then( async(createdUser) => {
       const { email, username, _id } = createdUser;
       const user = { email, username, _id };
+      
+      //we create a shopping cart when user acc is created
+      await ShoppingCart.create({owner: _id})
 
       // Send a json response containing the user object
       res.status(201).json({ user: user });
