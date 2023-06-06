@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Illustration = require("../models/Illustration.model");
-const imgUploader = require('../config/cloudinary.config');
+const fileUploader = require('../config/cloudinary.config');
 
 //Find all Illustration
 router.get("/illustration", async (req, res) => {
@@ -15,7 +15,7 @@ router.get("/illustration", async (req, res) => {
 
 //Create Illustration
 //upload
-router.post("/illustration/upload", imgUploader.single("imageUrl"), (req, res, next) => {
+router.post("/illustration/upload", fileUploader.single("imageUrl"), (req, res, next) => {
   if (!req.file) {
     next(new Error("No file uploaded!"));
     return;

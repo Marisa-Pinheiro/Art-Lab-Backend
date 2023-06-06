@@ -231,6 +231,7 @@ Components:
 | GET         | `/api/illustration`    |                             |                | 400          | Show all tournaments|
 | GET         | `/api/illustration/:id`|                             |                |              | Show specific Art   |
 | POST        | `/api/illustration`    |                             | 201            | 400          | Create new Art      |
+| PUT         | `/api/illustration`    |                             | 201            | 400          | edit Art            |
 | POST        | `/api/illustration/upload`|                          | 201            | 400          | upload image        |
 |USER|-|-|-|-|-|
 | GET         | `/api/user-profile/:id`|                             |                |              | show User info      |
