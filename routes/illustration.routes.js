@@ -27,7 +27,7 @@ router.post("/illustration/upload", fileUploader.single("imageUrl"), (req, res, 
 router.post("/illustration", async (req,res) => {
   try {
     const {author, name, price, date, imageUrl} = req.body;
-    const response = await Illustration.create({author, name, imageUrl, price, date} ,{new:true});
+    const response = await Illustration.create({author, name, imageUrl, price, date});
     res.json(response);
   } catch (error) {
     console.log(error)

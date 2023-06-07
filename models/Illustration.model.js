@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const ilustrationSchema = new Schema(
+const illustrationSchema = new Schema(
   {
     author: {
       type: Schema.Types.ObjectId,
@@ -21,6 +21,6 @@ const ilustrationSchema = new Schema(
   }
 );
 
-const Ilustration = model("Ilustration", ilustrationSchema);
+const Illustration = model("Illustration", illustrationSchema);
 
-module.exports = Ilustration;
+module.exports = Illustration;
