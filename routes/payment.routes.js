@@ -37,9 +37,12 @@ router.post("/:userid/cart/:illustrationid", async (req, res) => {
   
       await ShoppingCart.findByIdAndUpdate(cart._id, {items: cartArray})
     }
-    res.json(cart);
+
+    let response = await ShoppingCart.findOne({owner: userid})
+
+    res.json(response);
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 });
 
