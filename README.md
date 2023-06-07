@@ -212,6 +212,7 @@ Components:
 |ILLUSTRATIONS|-|-|-|
 | GET         | `/api/illustration`       |                             | Show tournaments    |
 | GET         | `/api/illustration/:id`   |                             | Show specific Art   |
+| GET         | `/api/illustration/owner/:ownerid`|                     | Show Art of user    |
 | POST        | `/api/illustration`       |                             | Create new Art      |
 | POST        | `/api/illustration/upload`|                             | upload image Art    |
 | PUT         | `/api/illustration`       |                             | edit Art            |

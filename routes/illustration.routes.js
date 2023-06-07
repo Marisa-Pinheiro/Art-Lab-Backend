@@ -27,8 +27,8 @@ router.post("/illustration/upload", fileUploader.single("imageUrl"), (req, res, 
 router.post("/illustration", async (req,res) => {
   try {
     const {author, name, price, date, imageUrl} = req.body;
-    const resp = await Illustration.create({author, name, imageUrl, price, date} ,{new:true});
-    res.json(resp);
+    const response = await Illustration.create({author, name, imageUrl, price, date} ,{new:true});
+    res.json(response);
   } catch (error) {
     console.log(error)
   }
@@ -44,6 +44,17 @@ router.get("/illustration/:id", async (req, res) => {
     console.log(error)
   }
 });
+
+//Find Illustrations of user
+router.get("/illustration/owner/:ownerid", async (req, res) => {
+  const {ownerid} = req.params
+  try {
+    const response = await Illustration.find({author: ownerid})
+    res.json(response);
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 //Update Illustration
 router.put("/illustration/:id", async (req,res) => {
