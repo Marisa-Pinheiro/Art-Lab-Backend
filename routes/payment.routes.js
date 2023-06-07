@@ -7,6 +7,7 @@ router.get("/:userid/cart", async (req, res) => {
     const {userid} = req.params;
 
     const cart = await ShoppingCart.findOne({owner: userid})
+    await cart.populate('items')
     res.json(cart);
   } catch (err) {
     console.log(err)
@@ -17,7 +18,7 @@ router.post("/:userid/cart/:illustrationid", async (req, res) => {
   try {
     const {userid, illustrationid} = req.params;
 
-    const cart = await ShoppingCart.findOne({owner: userid})
+    const cart = await ShoppingCart.findOne({owner: userid}).populate("items")
     
     let cartArray = [];
 
