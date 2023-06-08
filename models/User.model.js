@@ -20,6 +20,18 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Password is required."],
     },
+    favourites: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Illustration",
+      }
+    ],
+    bought: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Illustration",
+      }
+    ]
   }
 );
 

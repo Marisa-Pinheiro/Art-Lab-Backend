@@ -220,10 +220,13 @@ Components:
 | GET         | `/api/user-profile/:id`   |                             | show User info      |
 | PUT         | `/api/user-profile/:id`   |                             | edit User info      |
 | DEL         | `/api/user-profile/:id`   |                             | delete User info    |
+| PUT         | `/api//api/:userid/favourites-add/:id`|                 | add favourites info |
+| PUT         | `/api/:userid/favourites-del/:id`|                    | delete favourites info|
 |PAYMENTS|-|-|-|
 | GET         | `/api/:userid/cart`       |                             | show cart info      |
-| POST        | `/api/:userid/cart/:illustrationId`|                    | edit cart info    |
-| PUT        | `/:userid/cart/del/:illustrationid`|                    | del cart info    |
+| POST        | `/api/:userid/cart/:illustrationId`|                    | edit cart info      |
+| PUT         | `/:userid/cart/del/:illustrationid`|                    | del cart info       |
+| PUT         | `/:userid/paid/:illustrationid`|                        | add paid art to user|
 
 <br>
 

@@ -6,17 +6,18 @@ const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-router.get("/user-profile/:id", async (req, res, next) => {
+router.get("/user-profile/:id", async (req, res) => {
   try {
     const {id} = req.params
     let response = await User.findById(id);
+    delete response.password;
     res.json(response);
   } catch {
     console.log(error)
   }
 });
 
-router.put("/user-profile/:id", async (req, res, next) => {
+router.put("/user-profile/:id", async (req, res) => {
   try {
     const {id} = req.params
     const {username, password} = req.body
@@ -51,6 +52,62 @@ router.delete("/user-profile/:id", async (req,res) => {
     response = "User deleted"
     res.json(response);
   } catch {
+    console.log(error)
+  }
+})
+
+//get favourites
+router.get("/favourites/:userid", async (req, res) => {
+  try {
+    const {userid} = req.params
+    const userDB = await User.findById(userid);
+    await userDB.populate("favourites");
+    let response = userDB.favourites
+    res.json(response);
+  } catch {
+    console.log(error)
+  }
+});
+
+//add to favourites
+router.put("/:userid/favourites-add/:illustrationid", async (req,res) => {
+  try {
+    const {userid, illustrationid} = req.params;
+
+    const userDB = await User.findById(userid);
+    
+    let favouritesArray = userDB.favourites.map((item) => item)
+
+    favouritesArray.push(illustrationid)
+
+    await User.findByIdAndUpdate(userDB, {favourites: favouritesArray})
+
+    res.json("user favourites updated")
+
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+//remove from favorites
+router.put("/:userid/favourites-del/:illustrationid", async (req,res) => {
+  try {
+    const {userid, illustrationid} = req.params;
+    const userDB = await User.findById(userid);
+
+    let favouritesArray = [];
+    
+    userDB.favourites.forEach((item) => {
+      if(!item._id === illustrationid){
+        favouritesArray.push(item)
+      }
+    })
+
+    await User.findByIdAndUpdate(userDB, {favourites: favouritesArray})
+    
+    res.json("user favourites updated");
+
+  } catch (error) {
     console.log(error)
   }
 })

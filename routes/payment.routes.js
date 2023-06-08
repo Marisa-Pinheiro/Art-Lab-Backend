@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const ShoppingCart = require("../models/shoppinCart.model");
+const User = require("../models/User.model");
 
 //get cart info
 router.get("/:userid/cart", async (req, res) => {
@@ -47,6 +48,24 @@ router.post("/:userid/cart/:illustrationid", async (req, res) => {
   }
 });
 
+//add bought to user
+router.put("/:userid/paid/:illustrationid", async (req,res) => {
+  try {
+    const {userid, illustrationid} = req.params;
+    const userDB = await User.findById(userid);
+    
+    let boughtArray = userDB.bought.map((item) => item)
+
+    boughtArray.push(illustrationid)
+
+    await User.findByIdAndUpdate(userDB, {bought: boughtArray})
+
+    res.json("user bought updated")
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 //delete from cart
 router.put("/:userid/cart/del/:illustrationid", async (req,res) => {
   try {
@@ -62,8 +81,8 @@ router.put("/:userid/cart/del/:illustrationid", async (req,res) => {
     })
 
     await ShoppingCart.findByIdAndUpdate(cart._id, {items: cartArray})
-    
-    res.json({...cart,items:cartArray});
+    cart.items=cartArray
+    res.json(cart);
   } catch (err) {
     console.log(err)
   }

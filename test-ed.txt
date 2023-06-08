@@ -1,4 +1,0 @@
-Test:
-- delete from cart route
-
-Tested:
