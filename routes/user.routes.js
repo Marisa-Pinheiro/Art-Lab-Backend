@@ -60,11 +60,10 @@ router.delete("/user-profile/:id", async (req, res) => {
 });
 
 //get favourites
-router.get("/favourites/:userid", async (req, res) => {
+router.get("/favourites/:userId", async (req, res) => {
   try {
-    const { userid } = req.params;
-    const userDB = await User.findById(userid);
-    await userDB.populate("favourites");
+    const { userId } = req.params;
+    const userDB = await User.findById(userId).populate("favourites");
     let response = userDB.favourites;
     console.log(userDB);
     res.json(response);
