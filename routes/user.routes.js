@@ -107,7 +107,7 @@ router.put("/:userid/favourites-del/:illustrationid", async (req, res) => {
     const userDB = await User.findById(userid);
 
     await User.findByIdAndUpdate(userDB, {
-      $pull: { favourites: illustrationid },
+      $pull: { favourites: { _id: illustrationid } },
     });
 
     res.json("user favourites updated");
