@@ -48,24 +48,6 @@ router.post("/:userid/cart/:illustrationid", async (req, res) => {
   }
 });
 
-//add bought to user
-router.put("/:userid/paid/:illustrationid", async (req,res) => {
-  try {
-    const {userid, illustrationid} = req.params;
-    const userDB = await User.findById(userid);
-    
-    let boughtArray = userDB.bought.map((item) => item)
-
-    boughtArray.push(illustrationid)
-
-    await User.findByIdAndUpdate(userDB, {bought: boughtArray})
-
-    res.json("user bought updated")
-  } catch (error) {
-    console.log(error)
-  }
-})
-
 //delete from cart
 router.put("/:userid/cart/del/:illustrationid", async (req,res) => {
   try {
@@ -85,6 +67,39 @@ router.put("/:userid/cart/del/:illustrationid", async (req,res) => {
     res.json(cart);
   } catch (err) {
     console.log(err)
+  }
+})
+
+//get bought info
+router.get("/:userid/paid", async (req,res) => {
+  try {
+    const {userid} = req.params;
+    const userDB = await User.findById(userid);
+    await userDB.populate("bought")
+    
+    let boughtArray = userDB.bought.map((item) => item)
+
+    res.json(boughtArray)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+//add bought to user
+router.put("/:userid/paid", async (req,res) => {
+  try {
+    const {userid, illustrationid} = req.params;
+    const userDB = await User.findById(userid);
+    
+    let boughtArray = userDB.bought.map((item) => item)
+
+    boughtArray.push(illustrationid)
+
+    await User.findByIdAndUpdate(userDB, {bought: boughtArray})
+
+    res.json("user bought updated")
+  } catch (error) {
+    console.log(error)
   }
 })
 
