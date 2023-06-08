@@ -80,11 +80,9 @@ router.put("/:userid/favourites-add/:illustrationid", async (req, res) => {
 
     const userDB = await User.findById(userid);
 
-    let favouritesArray = userDB.favourites.map((item) => item);
-
-    favouritesArray.push(illustrationid);
-
-    await User.findByIdAndUpdate(userDB, { favourites: favouritesArray });
+    await User.findByIdAndUpdate(userDB, {
+      $push: { favourites: illustrationid },
+    });
 
     res.json("user favourites updated");
   } catch (error) {
