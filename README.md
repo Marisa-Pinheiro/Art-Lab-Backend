@@ -222,7 +222,8 @@ Components:
 | DEL         | `/api/user-profile/:id`   |                             | delete User info    |
 |PAYMENTS|-|-|-|
 | GET         | `/api/:userid/cart`       |                             | show cart info      |
-| POST        | `/api/:userid/cart/:illustrationId`|                    | edit cart info      |
+| POST        | `/api/:userid/cart/:illustrationId`|                    | edit cart info    |
+| PUT        | `/:userid/cart/del/:illustrationid`|                    | del cart info    |
 
 <br>
 
