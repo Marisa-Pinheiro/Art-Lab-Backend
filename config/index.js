@@ -3,7 +3,7 @@ const express = require("express");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 
-const FRONTEND_URL =process.env.ORIGIN;
+const FRONTEND_URL = process.env.ORIGIN;
 // Handling requests Cross Origin Resource Sharing, from defined adress
 const cors = require("cors");
 
