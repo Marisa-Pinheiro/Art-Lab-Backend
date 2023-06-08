@@ -65,7 +65,18 @@ router.get("/favourites/:userId", async (req, res) => {
     const { userId } = req.params;
     const userDB = await User.findById(userId).populate("favourites");
     let response = userDB.favourites;
-    console.log(userDB);
+    res.json(response);
+  } catch {
+    console.log(error);
+  }
+});
+
+//get favourites
+router.get("/favourites/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const userDB = await User.findById(userId).populate("favourites");
+    let response = userDB.favourites;
     res.json(response);
   } catch {
     console.log(error);
@@ -95,15 +106,9 @@ router.put("/:userid/favourites-del/:illustrationid", async (req, res) => {
     const { userid, illustrationid } = req.params;
     const userDB = await User.findById(userid);
 
-    let favouritesArray = [];
-
-    userDB.favourites.forEach((item) => {
-      if (!item._id === illustrationid) {
-        favouritesArray.push(item);
-      }
+    await User.findByIdAndUpdate(userDB, {
+      $pull: { favourites: illustrationid },
     });
-
-    await User.findByIdAndUpdate(userDB, { favourites: favouritesArray });
 
     res.json("user favourites updated");
   } catch (error) {
