@@ -21,9 +21,7 @@ router.post("/:userid/cart/:illustrationid", async (req, res) => {
   try {
     const { userid, illustrationid } = req.params;
 
-    const cart = await ShoppingCart.findOne({ owner: userid }).populate(
-      "items"
-    );
+    const cart = await ShoppingCart.findOne({ owner: userid }).populate("items");
 
     let cartArray = [];
 
@@ -82,7 +80,7 @@ router.get("/:userid/paid", async (req, res) => {
 });
 
 //add bought to user
-router.put("/:userid/paid", async (req, res) => {
+router.put("/:userid/paid/:illustrationid", async (req, res) => {
   try {
     const { userid, illustrationid } = req.params;
     const userDB = await User.findById(userid);
