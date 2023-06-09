@@ -94,4 +94,20 @@ router.put("/:userid/paid/:illustrationid", async (req, res) => {
   }
 });
 
+router.put("/:userid/favourites-add/:illustrationid", async (req, res) => {
+  try {
+    const { userid, illustrationid } = req.params;
+
+    const userDB = await User.findById(userid);
+
+    await User.findByIdAndUpdate(userDB, {
+      $push: { favourites: illustrationid },
+    });
+
+    res.json("user favourites updated");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
