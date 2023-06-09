@@ -103,7 +103,6 @@ router.put("/:userid/favourites-add/:illustrationid", async (req, res) => {
     await User.findByIdAndUpdate(userDB, {
       $push: { favourites: illustrationid },
     });
-
     res.json("user favourites updated");
   } catch (error) {
     console.log(error);
